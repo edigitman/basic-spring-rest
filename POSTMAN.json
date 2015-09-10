@@ -1,0 +1,91 @@
+{
+  "id": "9b801610-05a8-6442-21ea-aa21298290aa",
+  "name": "candidateRest",
+  "timestamp": 1441911421501,
+  "requests": [
+    {
+      "collectionId": "9b801610-05a8-6442-21ea-aa21298290aa",
+      "id": "aa25662f-f101-f08a-5999-97eba1a05c8b",
+      "name": "getAll",
+      "description": "get all candidates",
+      "url": "http://localhost:8090/candidate-service/candidate",
+      "method": "GET",
+      "headers": "",
+      "data": [],
+      "dataMode": "params",
+      "timestamp": 0,
+      "responses": [],
+      "version": 2
+    },
+    {
+      "collectionId": "9b801610-05a8-6442-21ea-aa21298290aa",
+      "id": "633fec9b-27e7-905a-ada6-290a8e120306",
+      "name": "getOne",
+      "description": "gets one Candidate by databaseId",
+      "url": "http://localhost:8090/candidate-service/candidate/3",
+      "method": "GET",
+      "headers": "",
+      "data": "{\n\t\"name\": \"edi\",\n\t\"enabled\": false\n}",
+      "dataMode": "raw",
+      "timestamp": 0,
+      "responses": [],
+      "version": 2
+    },
+    {
+      "collectionId": "9b801610-05a8-6442-21ea-aa21298290aa",
+      "id": "257c0be7-5192-fc02-eb4c-27fc570486b8",
+      "name": "create",
+      "description": "creates a new candidate with name and status",
+      "url": "http://localhost:8090/candidate-service/candidate",
+      "method": "POST",
+      "headers": "Content-Type: application/json\n",
+      "data": "{\n\t\"name\": \"edi\",\n\t\"enabled\": false\n}",
+      "dataMode": "raw",
+      "timestamp": 0,
+      "responses": [],
+      "version": 2
+    },
+    {
+      "collectionId": "9b801610-05a8-6442-21ea-aa21298290aa",
+      "id": "947ba2bf-50eb-33c0-d2c3-f006008f997b",
+      "name": "modify",
+      "description": "change name of a given candidate",
+      "url": "http://localhost:8090/candidate-service/candidate/4",
+      "method": "PUT",
+      "headers": "Content-Type: application/json\n",
+      "data": "{\n\t\"name\": \"eduard\",\n\t\"enabled\": false\n}",
+      "dataMode": "raw",
+      "timestamp": 0,
+      "responses": [],
+      "version": 2
+    },
+    {
+      "collectionId": "9b801610-05a8-6442-21ea-aa21298290aa",
+      "id": "8b15abb1-5251-b40a-2ef1-4316e45ee6d8",
+      "name": "delete a list",
+      "description": "delete a list of ids calling POST /delete",
+      "url": "http://localhost:8090/candidate-service/candidate/delete",
+      "method": "POST",
+      "headers": "Content-Type: application/json\n",
+      "data": "{\n\t\"ids\" : [1,4]\n}",
+      "dataMode": "raw",
+      "timestamp": 0,
+      "responses": [],
+      "version": 2
+    },
+    {
+      "collectionId": "9b801610-05a8-6442-21ea-aa21298290aa",
+      "id": "ca8dbf83-5403-1ffa-3089-59aa1066087f",
+      "name": "delete",
+      "description": "delete a list of ids calling DELETE /delete",
+      "url": "http://localhost:8090/candidate-service/candidate",
+      "method": "DELETE",
+      "headers": "Content-Type: application/json\n",
+      "data": "{\n\t\"ids\" : [2,3]\n}",
+      "dataMode": "raw",
+      "timestamp": 0,
+      "responses": [],
+      "version": 2
+    }
+  ]
+}

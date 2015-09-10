@@ -56,7 +56,7 @@ public class CandidateService {
         candidate = candidateRepository.save(candidate);
 
         //notify the other system
-        notificationService.notifyNewCandidate(candidate);
+        //notificationService.notifyNewCandidate(candidate);
 
         return candidate;
     }
@@ -69,7 +69,7 @@ public class CandidateService {
     }
 
     private void validateId(Long id) throws CandidateException {
-        if (id == null || id > 0)
+        if (id == null || id <= 0)
             throw new CandidateException(CandidateException.Type.DataNotFoundException, CandidateException.INVALID_ID);
 
         if (!candidateRepository.exists(id)) {

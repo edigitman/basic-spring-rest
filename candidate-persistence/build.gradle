@@ -6,9 +6,6 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootStarterVersion}")
-        classpath("org.hibernate:hibernate-validator:5.2.1.Final")
-        classpath("org.hibernate:hibernate-validator-annotation-processor:5.2.1.Final")
-        classpath("javax.validation:validation-api:1.1.0.Final")
     }
 }
 
@@ -33,6 +30,10 @@ dependencies {
 
     compile group:'org.springframework.boot', name:'spring-boot-starter-data-jpa', version:"$springBootStarterVersion"
     compile group:'com.h2database', name:'h2', version: '1.4.187'
+
+    compile group:"org.hibernate", name:"hibernate-validator", version:"5.2.1.Final"
+    compile group:"org.hibernate", name:"hibernate-validator-annotation-processor", version:"5.2.1.Final"
+    compile group:"javax.validation", name:"validation-api", version:"1.1.0.Final"
 
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootStarterVersion"
 

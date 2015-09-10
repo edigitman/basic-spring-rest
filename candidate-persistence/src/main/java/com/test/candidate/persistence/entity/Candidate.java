@@ -1,34 +1,24 @@
 package com.test.candidate.persistence.entity;
 
 import com.test.candidate.persistence.enums.CandidateStatusEnum;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by oleg on 09/08/15.
  */
 //TODO map entity using JPA annotations
 @Entity
-@Table(name = "candidates")
+@Table(name = "candidate")
 public class Candidate extends AbstractPersistable<Long> {
 
-    private Long id;
+
     private String name;
     private Boolean enabled;
     private CandidateStatusEnum status;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Column(name = "name", length = 30)
     @NotNull(message = "First name is compulsory")

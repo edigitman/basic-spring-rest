@@ -11,10 +11,20 @@ import java.util.List;
  */
 public class CandidateDTO implements Serializable {
 
+    private Long id;
     private String name;
     private Boolean enabled;
 
+    public CandidateDTO() {
+    }
+
+    public CandidateDTO(String name, Boolean enabled) {
+        this.name = name;
+        this.enabled = enabled;
+    }
+
     public CandidateDTO(Candidate candidate) {
+        this.id = candidate.getId();
         this.name = candidate.getName();
         this.enabled = candidate.getEnabled();
     }
@@ -43,7 +53,15 @@ public class CandidateDTO implements Serializable {
         this.enabled = enabled;
     }
 
-    public Candidate getCandidate() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Candidate buildCandidate() {
         Candidate candidate = new Candidate();
         candidate.setName(name);
         candidate.setEnabled(enabled);

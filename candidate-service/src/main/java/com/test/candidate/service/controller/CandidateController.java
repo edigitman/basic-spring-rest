@@ -8,12 +8,8 @@ import com.test.candidate.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -32,8 +28,8 @@ public class CandidateController {
         return CandidateDTO.resolveList(candidateService.getAll());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CandidateDTO getOne(@PathParam("id") Long id) throws CandidateException {
+    @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public CandidateDTO getOne(@PathVariable("id") Long id) throws CandidateException {
 
         try {
             Candidate candidate = candidateService.getById(id);
@@ -45,8 +41,8 @@ public class CandidateController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public CandidateDTO modify(@PathParam("id") Long id, @RequestBody CandidateDTO candidateDTO) throws Exception {
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public CandidateDTO modify(@PathVariable("id") Long id, @RequestBody CandidateDTO candidateDTO) throws Exception {
         return new CandidateDTO(candidateService.update(id, candidateDTO));
     }
 
@@ -55,7 +51,7 @@ public class CandidateController {
         return new CandidateDTO(candidateService.create(candidateDTO));
     }
 
-    @RequestMapping(name = "delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void delete(@RequestBody DeleteIdListDTO deleteIdListDTO) throws Exception {
         candidateService.delete(deleteIdListDTO);
     }

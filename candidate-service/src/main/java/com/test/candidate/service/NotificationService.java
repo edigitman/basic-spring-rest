@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.rmi.RemoteException;
 
 /**
  * Created by gitmaal on 10/09/2015.
@@ -28,7 +29,11 @@ public class NotificationService {
         candidate.setStatus(CandidateStatusEnum.SEND_TO_PROCESS);
         candidateRepository.save(candidate);
 
-        intakeGenerationService.intakeGeneration(candidate);
+        try {
+            intakeGenerationService.intakeGeneration(candidate);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
 }
