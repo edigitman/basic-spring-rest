@@ -55,8 +55,8 @@ public class CandidateService {
         candidate.setStatus(CandidateStatusEnum.NEW);
         candidate = candidateRepository.save(candidate);
 
-        //notify the other system
-        //notificationService.notifyNewCandidate(candidate);
+//        notify the other system
+        notificationService.notifyNewCandidate(candidate);
 
         return candidate;
     }

@@ -5,6 +5,7 @@ import com.test.candidate.persistence.enums.CandidateStatusEnum;
 import com.test.candidate.persistence.repository.CandidateRepository;
 import com.test.candidate.service.remote.IntakeGenerationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class NotificationService {
     @Autowired
     private CandidateRepository candidateRepository;
     @Autowired
+    @Qualifier("rmiIntakeGenerationService")
     private IntakeGenerationService intakeGenerationService;
 
     @Async
