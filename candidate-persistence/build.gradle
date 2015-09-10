@@ -6,7 +6,9 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootStarterVersion}")
-
+        classpath("org.hibernate:hibernate-validator:5.2.1.Final")
+        classpath("org.hibernate:hibernate-validator-annotation-processor:5.2.1.Final")
+        classpath("javax.validation:validation-api:1.1.0.Final")
     }
 }
 

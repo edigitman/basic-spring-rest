@@ -31,6 +31,8 @@ public class Candidate extends AbstractPersistable<Long> {
     }
 
     @Column(name = "name", length = 30)
+    @NotNull(message = "First name is compulsory")
+    @NotBlank(message = "First name is compulsory")
     public String getName() {
         return name;
     }
@@ -40,6 +42,7 @@ public class Candidate extends AbstractPersistable<Long> {
     }
 
     @Column(name = "enabled")
+    @NotNull
     public Boolean getEnabled() {
         return enabled;
     }

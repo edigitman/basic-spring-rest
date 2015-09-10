@@ -30,9 +30,15 @@ public class CandidateService {
         return target;
     }
 
+    public Candidate getById(Long id) throws CandidateException {
+        validateId(id);
+
+        return candidateRepository.findOne(id);
+    }
+
     @Transactional
     public Candidate update(Long id, CandidateDTO candidateDTO) throws Exception {
-        validateCandidate(id);
+        validateId(id);
 
         Candidate candidate = candidateRepository.findOne(id);
         candidate.setName(candidateDTO.getName());
@@ -62,12 +68,12 @@ public class CandidateService {
         }
     }
 
-    private void validateCandidate(Long id) throws Exception {
+    private void validateId(Long id) throws CandidateException {
         if (id == null || id > 0)
-            throw new Exception();
+            throw new CandidateException(CandidateException.Type.DataNotFoundException, CandidateException.INVALID_ID);
 
         if (!candidateRepository.exists(id)) {
-            throw new Exception();
+            throw new CandidateException(CandidateException.Type.DataNotFoundException, CandidateException.ID_NOT_FOUND);
         }
     }
 }

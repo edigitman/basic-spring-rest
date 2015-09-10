@@ -2,9 +2,12 @@ package com.test.candidate.service.controller;
 
 import com.test.candidate.dto.CandidateDTO;
 import com.test.candidate.dto.DeleteIdListDTO;
+import com.test.candidate.persistence.entity.Candidate;
+import com.test.candidate.service.CandidateException;
 import com.test.candidate.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +32,19 @@ public class CandidateController {
         return CandidateDTO.resolveList(candidateService.getAll());
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CandidateDTO getOne(@PathParam("id") Long id) throws CandidateException {
+
+        try {
+            Candidate candidate = candidateService.getById(id);
+            return new CandidateDTO(candidate);
+        } catch (CandidateException e) {
+            e.withResource("getOne");
+            e.withFieldError(new FieldError("Candidate", "id", CandidateException.NOT_NULL));
+            throw e;
+        }
+    }
+
     @RequestMapping(method = RequestMethod.PUT, value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public CandidateDTO modify(@PathParam("id") Long id, @RequestBody CandidateDTO candidateDTO) throws Exception {
         return new CandidateDTO(candidateService.update(id, candidateDTO));
@@ -48,5 +64,4 @@ public class CandidateController {
     public void deleteMethod(@RequestBody DeleteIdListDTO deleteIdListDTO) throws Exception {
         candidateService.delete(deleteIdListDTO);
     }
-
 }
