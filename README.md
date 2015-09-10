@@ -49,6 +49,7 @@ Don't forget to check global remarks section at the end before starting working 
 ### Step 4: Create an endpoint to delete candidates by ids
 * Add a new endpoint : `POST /candidate/delete requestBody : {ids : [1,6]}` 
 * Delete candidates from DB
+
 ### Step 5 : BONUS
 Imagine an application  `intake-generation-service` which is notified for every new candidate added  via `candidate-service` and generates an intake test exervice for him.
 Explain how would you technically organize communication/event propagation from `candidate-service` to this new module taking into account that `intake-generation` could be deployed on different server.  
