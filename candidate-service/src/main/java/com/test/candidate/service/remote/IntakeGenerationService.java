@@ -1,4 +1,4 @@
-package com.test.candidate.remote;
+package com.test.candidate.service.remote;
 
 import com.test.candidate.persistence.entity.Candidate;
 
