@@ -1,5 +1,6 @@
 package com.test.candidate.persistence.entity;
 
+import com.test.candidate.persistence.enums.CandidateStatusEnum;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Candidate extends AbstractPersistable<Long> {
     private Long id;
     private String name;
     private Boolean enabled;
+    private CandidateStatusEnum status;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,5 +46,15 @@ public class Candidate extends AbstractPersistable<Long> {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    public CandidateStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(CandidateStatusEnum status) {
+        this.status = status;
     }
 }

@@ -44,5 +44,9 @@ public class CandidateController {
         candidateService.delete(deleteIdListDTO);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteMethod(@RequestBody DeleteIdListDTO deleteIdListDTO) throws Exception {
+        candidateService.delete(deleteIdListDTO);
+    }
 
 }
