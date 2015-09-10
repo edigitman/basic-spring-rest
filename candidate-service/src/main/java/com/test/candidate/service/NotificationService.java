@@ -3,7 +3,7 @@ package com.test.candidate.service;
 import com.test.candidate.persistence.entity.Candidate;
 import com.test.candidate.persistence.enums.CandidateStatusEnum;
 import com.test.candidate.persistence.repository.CandidateRepository;
-import com.test.candidate.remote.IntakeGenerationService;
+import com.test.candidate.service.remote.IntakeGenerationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
