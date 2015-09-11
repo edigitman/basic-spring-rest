@@ -8,6 +8,6 @@ public class CandidateNotFoundException extends Exception {
     private static final long serialVersionUID = 1L;
 
     public CandidateNotFoundException(String key) {
-        super(key + " not available");
+        super("candidate id [" + key + "] not available");
     }
 }
