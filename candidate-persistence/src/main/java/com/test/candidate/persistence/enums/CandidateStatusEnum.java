@@ -5,6 +5,6 @@ package com.test.candidate.persistence.enums;
  */
 public enum CandidateStatusEnum {
 
-    NEW, SEND_TO_PROCESS, ERROR
+    NEW, SEND_TO_PROCESS, PROCESSED
 
 }
