@@ -5,8 +5,12 @@ import com.test.candidate.dto.DeleteIdListDTO;
 import com.test.candidate.persistence.entity.Candidate;
 import com.test.candidate.persistence.enums.CandidateStatusEnum;
 import com.test.candidate.persistence.repository.CandidateRepository;
+import com.test.candidate.service.exception.CandidateInvalidException;
+import com.test.candidate.service.exception.CandidateNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -30,15 +34,16 @@ public class CandidateService {
         return target;
     }
 
-    public Candidate getById(Long id) throws CandidateException {
+    public Candidate getById(Long id) throws CandidateNotFoundException {
         validateId(id);
 
         return candidateRepository.findOne(id);
     }
 
     @Transactional
-    public Candidate update(Long id, CandidateDTO candidateDTO) throws Exception {
+    public Candidate update(Long id, CandidateDTO candidateDTO) throws CandidateNotFoundException, CandidateInvalidException {
         validateId(id);
+        validateCandidate(candidateDTO);
 
         Candidate candidate = candidateRepository.findOne(id);
         candidate.setName(candidateDTO.getName());
@@ -48,7 +53,9 @@ public class CandidateService {
     }
 
     @Transactional
-    public Candidate create(CandidateDTO candidateDTO) {
+    public Candidate create(CandidateDTO candidateDTO) throws CandidateInvalidException {
+        validateCandidate(candidateDTO);
+
         Candidate candidate = new Candidate();
         candidate.setName(candidateDTO.getName());
         candidate.setEnabled(candidateDTO.getEnabled());
@@ -62,18 +69,32 @@ public class CandidateService {
     }
 
     @Transactional
-    public void delete(DeleteIdListDTO deleteIdListDTO) {
+    public void delete(DeleteIdListDTO deleteIdListDTO) throws CandidateNotFoundException {
         for (Long id : deleteIdListDTO.getIds()) {
-            candidateRepository.delete(id);
+            try {
+                candidateRepository.delete(id);
+            } catch (EmptyResultDataAccessException exception) {
+                throw new CandidateNotFoundException("" + id);
+            }
         }
     }
 
-    private void validateId(Long id) throws CandidateException {
+    private void validateCandidate(CandidateDTO candidateDTO) throws CandidateInvalidException {
+        if (candidateDTO == null) {
+            throw new CandidateInvalidException("object is null");
+        }
+
+        if (StringUtils.isEmpty(candidateDTO.getName())) {
+            throw new CandidateInvalidException("name is null for cancidate id " + candidateDTO.getId());
+        }
+    }
+
+    private void validateId(Long id) throws CandidateNotFoundException {
         if (id == null || id <= 0)
-            throw new CandidateException(CandidateException.Type.DataNotFoundException, CandidateException.INVALID_ID);
+            throw new CandidateNotFoundException("" + id);
 
         if (!candidateRepository.exists(id)) {
-            throw new CandidateException(CandidateException.Type.DataNotFoundException, CandidateException.ID_NOT_FOUND);
+            throw new CandidateNotFoundException("" + id);
         }
     }
 }
